@@ -1,4 +1,4 @@
-const regexAllOccurences = /{{\s+(Name|Price)\/\w+\s+}}/gm;
+const regexAllDirectivesOccurences = /\[\s+(Name|Price)\/\w+\s+\]/gm;
 const regexGetCoinSymbol = /(?<=\/)\w+/gm;
 
-export { regexAllOccurences, regexGetCoinSymbol };
+export { regexAllDirectivesOccurences, regexGetCoinSymbol };
