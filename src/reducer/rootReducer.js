@@ -3,8 +3,8 @@ import { contentReducer } from "./contentReducer";
 import { errorReducer } from "./errorReducer";
 
 const rootReducer = combineReducers({
-  contentReducer,
-  errorReducer
+  content: contentReducer,
+  error: errorReducer
 });
 
 export default rootReducer;
