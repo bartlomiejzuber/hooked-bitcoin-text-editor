@@ -1,0 +1,26 @@
+.editor {
+  display: flex;
+  flex-direction: row;
+  background-color: #352e2e;
+  padding: 0em 0.75em;
+  color: #fff;
+  min-height: 500px;
+  .section {
+    flex: 1;
+    padding: 0.5em;
+    &:first-child {
+      border-right: 4px solid #5c6b5f;
+    }
+
+    header {
+      font-size: 1.7em;
+    }
+
+    .editor-area, .preview-area {
+        margin: 0.2em;
+        padding: 1em;
+        font-size: 1.2em;
+        outline: none;
+    }
+  }
+}
