@@ -1,8 +1,8 @@
 # hooked-bitcoin-text-editor
 
-[![Travis][build-badge]][build]
+[![Build Status](https://travis-ci.org/bartlomiejzuber/hooked-bitcoin-text-editor.svg?branch=master)](https://travis-ci.org/bartlomiejzuber/hooked-bitcoin-text-editor)
 [![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+[![Coverage Status](https://coveralls.io/repos/github/bartlomiejzuber/hooked-bitcoin-text-editor/badge.svg)](https://coveralls.io/github/bartlomiejzuber/hooked-bitcoin-text-editor)
 
 Describe hooked-bitcoin-text-editor here.
 
