@@ -1,16 +1,22 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { RegexExecIterator } from "../../utils/regex-exec-iterator";
 import CoinpaprikaRepository from "../../repository/CoinpaprikaRepository";
 import EDITOR_METHODS from "../../const/editor-methods";
+import {
+  regexAllDirectivesOccurences,
+  regexGetCoinSymbol
+} from "../../const/regex";
+import { errorActions, contentActions } from "../../actions";
 
-const regexExecIterator = new RegexExecIterator(regexAllOccurences);
+const regexExecIterator = new RegexExecIterator(regexAllDirectivesOccurences);
 const coinpaprikaRepository = new CoinpaprikaRepository();
-const getValue = async (symbol, type) => {
+const getValue = async (target, type) => {
+  const coinSymbol = target.match(regexGetCoinSymbol)[0];
   switch (type) {
     case EDITOR_METHODS.NAME:
-      return coinpaprikaRepository.getName(symbol);
+      return coinpaprikaRepository.getName(coinSymbol);
     case EDITOR_METHODS.PRICE:
-      return coinpaprikaRepository.getPrice(symbol);
+      return coinpaprikaRepository.getPrice(coinSymbol);
   }
 
   throw Error("Method not supported");
@@ -25,25 +31,37 @@ const handleChange = async (e, dispatch) => {
       const targetValue = await getValue(target, actionType);
       editorContentHtml = editorContentHtml.replace(target, targetValue);
     } catch (e) {
-      dispatch(e.message);
+      dispatch(errorActions.showError(e.message));
     }
   }
 
-  dispatch({ __html: editorContentHtml });
+  dispatch(contentActions.updateContent(editorContentHtml));
 };
 
-const EditorSection = ({ dispatch }) => {
+const EditorSection = ({
+  dispatch,
+  title,
+  sectionClassName,
+  editorContainerClassName,
+  editorAreaClassName
+}) => {
+  const editorAreaRef = useRef();
   const handleChangeCallback = useCallback(e => handleChange(e, dispatch), [
     dispatch
   ]);
+  const handleEditorAreaFocus = useCallback(
+    () => editorAreaRef.current.focus(),
+    [editorAreaRef]
+  );
   return (
-    <div className="section">
-      <header>Editor</header>
-      <div className="editor-container">
+    <div className={sectionClassName} onClick={handleEditorAreaFocus}>
+      <header>{title}</header>
+      <div className={editorContainerClassName}>
         <div
-          className="editor"
-          contentEditable
+          className={editorAreaClassName}
           onInput={handleChangeCallback}
+          ref={editorAreaRef}
+          contentEditable
         />
       </div>
     </div>

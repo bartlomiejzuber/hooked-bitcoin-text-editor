@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
-const PreviewSection = ({ content }) => {
-  return (
-    <div className="section">
-      <header>Preview</header>
-      <div className="editor-container">
-        <div dangerouslySetInnerHTML={content} />
-      </div>
+const PreviewSection = ({
+  title,
+  content,
+  sectionClassName,
+  previewContainerClassName,
+  previewAreaClassName
+}) => (
+  <div className={sectionClassName}>
+    <header>{title}</header>
+    <div className={previewContainerClassName}>
+      <div
+        className={previewAreaClassName}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </div>
-  );
-};
+  </div>
+);
 
 export default PreviewSection;
